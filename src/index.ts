@@ -15,7 +15,7 @@ export function evaluate (size: number, claims: claim[]): [truthValues: boolean[
     output[index] = []
 
     for (const claim of claims) {
-      output[index].push(eq(row[claims.indexOf(claim)], claim(...row)))
+      output[index].push(claim(...row))
     }
 
     index++
@@ -39,9 +39,9 @@ export function evaluate (size: number, claims: claim[]): [truthValues: boolean[
 export function main (): void {
   const size = 3
   const claims: claim[] = [
-    (a, b) => not(b),
-    (_, b, c) => not(c),
-    (a, b, c) => and(not(a), not(b))
+    (a, b) => eq(a, not(b)),
+    (_, b, c) => eq(b, not(c)),
+    (a, b, c) => eq(c, and(not(a), not(b)))
   ]
 
   const [truthValues, result] = evaluate(size, claims)
