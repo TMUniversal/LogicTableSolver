@@ -1,7 +1,7 @@
 {
   "name": "logic-table-solver",
   "version": "1.0.0",
-  "description": "",
+  "description": "Solve Logic Tables with custom sizes and claims",
   "main": "build/index.js",
   "scripts": {
     "start": "node .",

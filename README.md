@@ -5,7 +5,7 @@
   </a>
 </p>
 
-> Solve Logic Tables with custom sizes and claims.
+> Solve Logic Tables with custom sizes and claims
 
 ## Install
 
