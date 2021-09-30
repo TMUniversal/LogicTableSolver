@@ -2,7 +2,7 @@ export function generateInputTable (size: number): boolean[][] {
   if (size < 1) throw new Error('Tables must be at least one column.')
   const columns: boolean[][] = []
 
-  const columnLength = Math.pow(2, size)
+  const rowCount = Math.pow(2, size)
 
   for (let column = 0; column < size; column++) {
     columns[column] = []
@@ -10,7 +10,7 @@ export function generateInputTable (size: number): boolean[][] {
 
     const intervals = Math.pow(2, column)
 
-    const iterations = columnLength / intervals
+    const iterations = rowCount / intervals
 
     for (let iteration = 0; iteration < iterations; iteration++) {
       for (let interval = 0; interval < intervals; interval++) {
@@ -19,15 +19,36 @@ export function generateInputTable (size: number): boolean[][] {
     }
   }
 
+  // Reverse order of the columns
+  // C, B, A => A, B, C
+  columns.reverse()
+
+  // Convert column array to row array
+  /*
+
+    Column format:
+    [ 00001111, 00110011, 01010101 ]
+
+    Row format: [
+      [ 0, 0, 0 ],
+      [ 0, 0, 1 ],
+      [ 0, 1, 0 ],
+      [ 0, 1, 1 ],
+      [ 1, 0, 0 ],
+      [ 1, 0, 1 ],
+      [ 1, 1, 0 ],
+      [ 1, 1, 1 ],
+    ]
+
+  */
+
   const rows: boolean[][] = []
 
-  let index = 0
-  for (const column of columns) {
-    rows[index] = []
-    for (const value of column) {
-      rows[index].push(value)
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+    rows[rowIndex] = []
+    for (let column = 0; column < columns.length; column++) {
+      rows[rowIndex].push(columns[column][rowIndex])
     }
-    index++
   }
 
   return rows
