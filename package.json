@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "start": "node .",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "prepare": "husky install"
   },
   "dependencies": {},
   "devDependencies": {
